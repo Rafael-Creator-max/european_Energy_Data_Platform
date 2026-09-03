@@ -6,7 +6,10 @@ authors = [
     { name = "Rafael-Creator-max", email = "pereztarirastalin@gmail.com" }
 ]
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "psycopg[binary]>=3.3.5",
+    "python-dotenv>=1.2.3",
+]
 
 [project.scripts]
 energy-ingestion = "energy_ingestion:main"
