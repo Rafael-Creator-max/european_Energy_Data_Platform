@@ -20,6 +20,23 @@ INSERT_SQL = """
     )
 
     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+
+    ON CONFLICT(
+        measure_item
+        ,date_utc
+        ,country_code
+    )
+
+    DO UPDATE SET
+        date_short = EXCLUDED.date_short,
+        time_from = EXCLUDED.time_from,
+        time_to = EXCLUDED.time_to,
+        cov_ratio = EXCLUDED.cov_ratio,
+        value = EXCLUDED.value,
+        value_scale_to_100 = EXCLUDED.value_scale_to_100,
+        create_date = EXCLUDED.create_date,
+        update_date = EXCLUDED.update_date,
+        loaded_at = NOW()
 """
 
 def load_entsoe_hourly_load(file_path:Path,limit: int | None=None) -> None:
